@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Product from '../Product/Product';
 import './Shop.css'
+import '../random/random'
+import { handleRandomProduct } from '../random/random'
 
 const Shop = () => {
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState([])
 
     // 4 item add to Cart
+
     const handleAddToCart = (selectedWatch) => {
         if (cart.length >= 4) {
             alert('You can select maximum 4 items');
@@ -14,7 +17,7 @@ const Shop = () => {
             let newCart = [];
             const addedWatch = cart.find(product => product.id === selectedWatch.id);
             if (addedWatch) {
-                alert("Same item can't be added twice");
+                alert("You already select this item");
             } else {
                 selectedWatch.quantity = 1;
                 newCart = [...cart, selectedWatch];
@@ -47,8 +50,13 @@ const Shop = () => {
                         cart.map(item => <h4 key={item.id}>{item.name}</h4>)
                     }
                 </div>
+                {/* Randomly Select button   */}
+                <button onClick={() => handleRandomProduct(cart, setCart)}>
+                    Choose One
+                    {/* <FontAwesomeIcon className="icon" icon={faRandom} /> */}
+                </button>
             </div>
-        </div>
+        </div >
     );
 };
 
