@@ -10,7 +10,7 @@ const Shop = () => {
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState([])
 
-    // 4 item add to Cart
+    // Maximum 4 item Show to the Cart
 
     const handleAddToCart = (selectedWatch) => {
         if (cart.length >= 4) {
