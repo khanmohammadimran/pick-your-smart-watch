@@ -3,6 +3,8 @@ import Product from '../Product/Product';
 import './Shop.css'
 import '../random/random'
 import { handleRandomProduct } from '../random/random'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDeleteLeft, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
 
 const Shop = () => {
     const [products, setProducts] = useState([])
@@ -26,6 +28,11 @@ const Shop = () => {
         }
     }
 
+    // Empty All Product 
+    const emptyAllProduct = (setCart) => {
+        setCart([])
+    }
+
     useEffect(() => {
         fetch('products.json')
             .then(res => res.json())
@@ -47,13 +54,19 @@ const Shop = () => {
                 <h3>Selected Watch</h3>
                 <div>
                     {
-                        cart.map(item => <h4 key={item.id}>{item.name}</h4>)
+                        cart.map(item => <li key={item.id}>{item.name}</li>)
                     }
                 </div>
-                {/* Randomly Select button   */}
-                <button onClick={() => handleRandomProduct(cart, setCart)}>
+                {/* Random Product Select button   */}
+                <button className='secondary-button' onClick={() => handleRandomProduct(cart, setCart)}>
                     Choose One
-                    {/* <FontAwesomeIcon className="icon" icon={faRandom} /> */}
+                    <FontAwesomeIcon className="icon btn-info" icon={faHeartbeat} />
+                </button>
+                <br />
+                {/* Empty Product Button  */}
+                <button className='secondary-button' onClick={() => emptyAllProduct(setCart)}>
+                    Empty Item
+                    <FontAwesomeIcon className="icon btn-info" icon={faDeleteLeft} />
                 </button>
             </div>
         </div >
